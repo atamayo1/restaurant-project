@@ -1,0 +1,13 @@
+{
+    "restaurants": [
+        {
+            "id": "5914833b-8868-4789-955d-8076bd85126b",
+            "name": "Mcdonald's",
+            "address": "Cra. 100",
+            "phone": "+57-321-432-90-99",
+            "ratings": 5,
+            "logoUrl": "https://www.mcdonalds.com.co/images/layout/mcdonalds-logo-footer-bg-white.png",
+            "website": "https://www.mcdonalds.com.co/"
+        }
+    ]
+}
