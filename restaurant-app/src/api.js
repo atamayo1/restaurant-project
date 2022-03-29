@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3001'
+import { routes } from "./env/env"
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 const randomNumber = (min = 0, max = 1) =>
@@ -14,7 +14,7 @@ async function callApi(endpoint, options = {}) {
     Accept: 'application/json',
   }
 
-  const url = BASE_URL + endpoint
+  const url = routes.BASE_URL + endpoint
   const response = await fetch(url, options)
   const data = await response.json()
 

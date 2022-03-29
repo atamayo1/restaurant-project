@@ -1,4 +1,20 @@
 {
+    "users": [
+        {
+            "id": 1,
+            "first_name": "Anthony",
+            "last_name": "Tamayo Ortega",
+            "username": "anthotamayo",
+            "password": "e10adc3949ba59abbe56e057f20f883e"
+        },
+        {
+            "id": 2,
+            "first_name": "Aura Maria",
+            "last_name": "Rodriguez Giraldo",
+            "username": "marirogir",
+            "password": "c33367701511b4f6020ec61ded352059"
+        }
+    ],
     "restaurants": [
         {
             "id": "5914833b-8868-4789-955d-8076bd85126b",
