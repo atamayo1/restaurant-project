@@ -1,6 +1,6 @@
 import axios from 'axios'
 import md5 from 'md5'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Cookies from 'universal-cookie'
 import HomePageComponent from '../../components/HomePageComponent/HomePageComponent'
 import { routes } from '../../env/env'
@@ -31,28 +31,31 @@ const HomePageContainer = () => {
   }
 
   const SignIn = () => {
-    console.log('form', form)
     axios
-      .get(routes.BASE_URL, {
+      .get(routes.BASE_URL+'/users', {
         params: { username: form.username, password: md5(form.password) },
       })
       .then((response) => {
-        console.log('response 1', response)
         return response.data
       })
       .then((response) => {
         if (response.length > 0) {
           let respuesta = response[0]
-          cookies.set('id', respuesta.id, { path: '/' })
-          cookies.set('first_name', respuesta.first_name, { path: '/' })
-          cookies.set('last_name', respuesta.last_name, { path: '/' })
-          cookies.set('username', respuesta.username, { path: '/' })
-          NotificationManager.success(
-            `Bienvenido ${respuesta.first_name} ${respuesta.last_name}`,
-            '',
-            5000,
-          )
-          console.log('response 2', respuesta)
+          if(respuesta){
+            cookies.set('id', respuesta.id, { path: '/' })
+            cookies.set('first_name', respuesta.first_name, { path: '/' })
+            cookies.set('last_name', respuesta.last_name, { path: '/' })
+            cookies.set('username', respuesta.username, { path: '/' })
+            NotificationManager.success(
+              `Bienvenido ${respuesta.first_name} ${respuesta.last_name}`,
+              '',
+              5000,
+            )
+            setShowLogin(!showLogin)
+            history.push({
+              pathname: `/restaurants`,
+            })
+          }
         } else {
           NotificationManager.warning(
             'El usuario o la contraseña no son correctos',
@@ -65,6 +68,18 @@ const HomePageContainer = () => {
         NotificationManager.error(error, '', 5000)
       })
   }
+
+  useEffect(() => {
+    if(cookies.get('username')){
+      history.push({
+        pathname: `/restaurants`,
+      })
+    }else{
+      history.push({
+        pathname: `/`,
+      })
+    }
+  }, [])
 
   return (
     <>

@@ -9,7 +9,7 @@ export const LoginContent = styled.div`
 `
 
 export const ContentCredentials = styled.div`
-  background: ${({theme}) => theme.primaryBackgroundBrownLight};
+  background: ${({theme}) => theme.primaryBackgroundBrown};
   width: 50%;
   height: fit-content;
   display: grid;
