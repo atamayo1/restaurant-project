@@ -5,7 +5,7 @@ const RestaurantListItem = (props) => {
   return (
     <ContentListItem>
       <ImgCompanyLogo
-        src={props?.restaurant?.logoUrl}
+        src={props?.restaurant?.image}
         alt={'Conf company image logo'}
       />
 
