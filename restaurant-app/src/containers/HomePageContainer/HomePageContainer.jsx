@@ -1,7 +1,6 @@
 import axios from 'axios'
 import md5 from 'md5'
 import React, { useEffect, useState } from 'react'
-import Cookies from 'universal-cookie'
 import HomePageComponent from '../../components/HomePageComponent/HomePageComponent'
 import { routes } from '../../env/env'
 import PortalModal from '../../Portals'
@@ -9,10 +8,11 @@ import LoginPageContainer from '../LoginPageContainer/LoginPageContainer'
 import { ContentLogin } from './HomePageContainer.styled'
 import { NotificationManager } from 'react-notifications'
 import { useHistory } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
 
-const HomePageContainer = () => {
+const HomePageContainer = ({ setIsAuthenticated }) => {
   const history = useHistory()
   const [showLogin, setShowLogin] = useState(false)
   const [form, setValues] = useState({
@@ -30,9 +30,24 @@ const HomePageContainer = () => {
     })
   }
 
+  useEffect(() => {
+    if (cookies.get('username')) {
+      history.push({
+        pathname: `/restaurants`,
+      })
+      setIsAuthenticated(true)
+    } else {
+      history.push({
+        pathname: `/`,
+      })
+      setIsAuthenticated(false)
+    }
+  }, [])
+  
+
   const SignIn = () => {
     axios
-      .get(routes.BASE_URL+'/users', {
+      .get(routes.BASE_URL + '/users', {
         params: { username: form.username, password: md5(form.password) },
       })
       .then((response) => {
@@ -41,17 +56,19 @@ const HomePageContainer = () => {
       .then((response) => {
         if (response.length > 0) {
           let respuesta = response[0]
-          if(respuesta){
+          if (respuesta) {
             cookies.set('id', respuesta.id, { path: '/' })
             cookies.set('first_name', respuesta.first_name, { path: '/' })
             cookies.set('last_name', respuesta.last_name, { path: '/' })
             cookies.set('username', respuesta.username, { path: '/' })
+            cookies.set('TrustSafety', respuesta.password, { path: '/' })
             NotificationManager.success(
               `Bienvenido ${respuesta.first_name} ${respuesta.last_name}`,
               '',
               5000,
             )
             setShowLogin(!showLogin)
+            setIsAuthenticated(true)
             history.push({
               pathname: `/restaurants`,
             })
@@ -68,18 +85,6 @@ const HomePageContainer = () => {
         NotificationManager.error(error, '', 5000)
       })
   }
-
-  useEffect(() => {
-    if(cookies.get('username')){
-      history.push({
-        pathname: `/restaurants`,
-      })
-    }else{
-      history.push({
-        pathname: `/`,
-      })
-    }
-  }, [])
 
   return (
     <>

@@ -18,7 +18,7 @@
     "restaurants": [
         {
             "id": 1,
-            "name": "Mcdonald's",
+            "name": "McDonald's",
             "address": "Cra. 100",
             "phone": "+57-321-432-90-99",
             "ratings": 5,
@@ -27,12 +27,12 @@
         },
         {
             "id": 2,
-            "name": "Mcdonald's",
+            "name": "Burguer King",
             "address": "Calle 5",
-            "phone": "+57-321-432-90-99",
-            "ratings": 5,
-            "logoUrl": "https://www.mcdonalds.com.co/images/layout/mcdonalds-logo-footer-bg-white.png",
-            "website": "https://www.mcdonalds.com.co/"
+            "phone": "+57-321-432-78-86",
+            "ratings": 4,
+            "logoUrl": "https://static.ofertia.com.co/comercios/burger-king/profile-90431.v7.png",
+            "website": "https://www.bk.com.co/"
         }
     ]
 }

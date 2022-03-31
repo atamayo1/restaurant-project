@@ -22,12 +22,12 @@ async function callApi(endpoint, options = {}) {
 }
 
 const api = {
-  badges: {
+  restaurants: {
     list() {
       return callApi('/restaurants')
     },
-    read(badgeId) {
-      return callApi(`/restaurants/${badgeId}`)
+    read(restaurantId) {
+      return callApi(`/restaurants/${restaurantId}`)
     },
   },
 }

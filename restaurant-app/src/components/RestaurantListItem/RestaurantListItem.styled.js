@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const RestaurantListItem = styled.div`
+export const ContentListItem = styled.div`
   background: #ffffff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
   border-radius: 5px;

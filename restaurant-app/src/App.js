@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './themes/themes'
@@ -7,22 +7,33 @@ import HomePageContainer from './containers/HomePageContainer/HomePageContainer'
 import RestaurantsContainer from './containers/RestaurantsContainer/RestaurantsContainer'
 import RestaurantDetailContainer from './containers/RestaurantDetailContainer/RestaurantDetailContainer'
 import NotFound from './containers/NotFound/NotFound'
+import Layout from './containers/Layout/Layout'
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={HomePageContainer} />
-            <Route exact path="/restaurants" component={RestaurantsContainer} />
-            <Route
-              exact
-              path="/restaurants/:restaurantId"
-              component={RestaurantDetailContainer}
-            />
-            <Route component={NotFound} />
-          </Switch>
+          <Layout isAuthenticated={isAuthenticated}>
+            <Switch>
+              <Route exact path="/" component={() => <HomePageContainer setIsAuthenticated={setIsAuthenticated} />}  />
+              <Route
+                exact
+                path="/restaurants" 
+                isAuthenticated={isAuthenticated}
+                component={RestaurantsContainer}
+              />
+              <Route
+                exact
+                path="/restaurants/:restaurantId"
+                isAuthenticated={isAuthenticated}
+                component={RestaurantDetailContainer}
+              />
+              <Route component={NotFound} />
+            </Switch>
+          </Layout>
         </BrowserRouter>
       </div>
     </ThemeProvider>
